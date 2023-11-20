@@ -3,7 +3,9 @@ import "./input.scss"
 
 const Input = () => {
   return (
+    <div>
     <input className='input'/>
+    </div>
   )
 }
 
