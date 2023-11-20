@@ -1,0 +1,30 @@
+@import "src/global";
+
+.login-main{
+ height: 100vh;
+ background-color: #237CFF;
+
+
+  .login{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+
+    .heading{
+      text-align: center;
+      font-family:"Lexend-Deca";
+      font-size: 64px;
+      line-height: normal;
+      text-align: center;
+    }
+    .contain{
+      text-align: center;
+      font-family: Lexend-Deca;
+      font-size: 16px;
+    }
+    
+
+  }
+}
