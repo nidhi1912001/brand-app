@@ -1,6 +1,5 @@
 import React from 'react'
-import Container from '../container/Container'
-import { LiaShoppingBagSolid } from "react-icons/lia";
+import Container from '../container/Container';
 import { FaUser,FaHeart } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
@@ -8,6 +7,7 @@ import Input from "../input/Input";
 import "./header.scss"
 import logo from "../../assets/logo-symbol.png"
 import brand from "../../assets/Brand.png"
+
 
 const Header = () => {
   return (
