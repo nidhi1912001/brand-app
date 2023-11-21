@@ -1,30 +1,82 @@
 @import "src/global";
 
-.login-main{
- height: 100vh;
- background-color: #237CFF;
+.login-main {
+  height: 100vh;
+  background-color: #237CFF;
+  background-image: url("../../assets/Vectors.png");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: 100%;
 
 
-  .login{
+  .login {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -60%);
     color: white;
+    display: grid;
+    gap: 25px;
 
-    .heading{
+    .heading {
       text-align: center;
-      font-family:"Lexend-Deca";
+      font-family: "Lexend-Deca";
       font-size: 64px;
       line-height: normal;
       text-align: center;
+      margin: 0;
     }
-    .contain{
-      text-align: center;
-      font-family: Lexend-Deca;
+
+    .contain {
+      font-family: "Lexend-Deca";
       font-size: 16px;
+      margin: 0;
     }
-    
+
+    .login-data {
+      margin: auto;
+      display: grid;
+      gap: 25px;
+
+      .checkbox-password {
+        display: flex;
+
+        .remember {
+          font-family: "Montserrat";
+          font-size: 14px;
+          line-height: normal;
+          display: flex;
+          align-items: center;
+        }
+
+        .link {
+          color: #FFF;
+          margin: auto;
+          padding-left: 20px;
+          font-family: "Montserrat";
+          font-size: 14px;
+          text-decoration-line: underline;
+        }
+
+
+      }
+
+      .button-login {
+        height: 45px;
+        border-radius: 10px;
+        background: #FF9017;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.30);
+        border: none;
+        color: #FFF;
+        font-family: "Lexend-Deca";
+        font-size: 16px;
+
+
+      }
+
+
+    }
+
 
   }
 }

@@ -1,10 +1,10 @@
 import React from 'react'
 import "./container.scss"
 
-const Container = ({Children}) => {
-    console.log(Children)
+const Container = ({children}) => {
+
   return (
-    <div className='container'>{Children}</div>
+    <div className='container'>{children}</div>
   )
 }
 

@@ -1,20 +1,22 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import axios from "axios";
 import "./login.scss";
 import Input from "../../component/input/Input";
 
 const Logins = () => {
-  const [userData, setUserData] = useState({ email: "", password: "" });
+  const [ userData, setUserData ] = useState( { email: "", password: "" } );
+  const navigate = useNavigate()
   const accessToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTcwMDQ4MjQzNCwiZXhwIjoxNzAyMjEwNDM0fQ.O8ljCJhWEYau6_mZJERLyX4Oi166jCb25ISWg8ng9ls`;
 
-  const handleChange = (e) => {
+  const handleChange = ( e ) => {
     const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
-    console.log(userData);
+    setUserData( { ...userData, [name]: value } );
+    console.log( userData );
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async ( e ) => {
     e.preventDefault();
 
     try {
@@ -23,15 +25,15 @@ const Logins = () => {
         userData
       );
 
-      console.log("Response:", response.data);
+      console.log( "Response:", response.data );
     } catch (error) {
-      if (error.response) {
-        console.log("Server responded with status:", error.response.status);
-        console.log("Error message:", error.response.data);
-      } else if (error.request) {
-        console.log("Request made but no response received:", error.request);
+      if ( error.response ) {
+        console.log( "Server responded with status:", error.response.status );
+        console.log( "Error message:", error.response.data );
+      } else if ( error.request ) {
+        console.log( "Request made but no response received:", error.request );
       } else {
-        console.error("Error:", error.message);
+        console.error( "Error:", error.message );
       }
     }
   };
@@ -39,24 +41,25 @@ const Logins = () => {
   return (
     <form className="login-main" onSubmit={handleSubmit}>
       <div className="login">
-        <h1 className="heading">Sign in</h1>
+        <p className="heading">Sign in</p>
         <p className="contain">Sign in and start managing your candidates!</p>
 
-        <Input />
+        <div className="login-data">
 
-        <Input />
+          <Input type="text" name="email" value={userData.email} onChange={handleChange} placeholder="Email"/>
 
-        <div className="signin">
-          <input
-            type="checkbox"
-            id="remember"
-            name="remember"
-            value="remember"
-          />
-          Remember me
-          <a href=""> Forgot password </a>
+          <Input type="password" name="password" value={userData.password} onChange={handleChange}
+                 placeholder="password"/>
+
+          <div className="checkbox-password">
+
+            <Input type="checkbox" id="remember" name="remember" value="remember"/>
+            <span className="remember">Remember me</span>
+
+            <a href="" className="link"> Forgot password? </a>
+          </div>
+          <button className="button-login" onClick={()=>navigate("/home")}> Login</button>
         </div>
-        <button> Login</button>
       </div>
     </form>
   );
