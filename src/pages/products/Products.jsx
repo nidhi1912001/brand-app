@@ -7,12 +7,18 @@ import Container from "../../component/container/Container";
 const Products = () => {
 
   const  [selectCategories, setSelectCategories] = useState({});
+  
 
 
-  const selectCategory = useCallback( (data) =>{
-    console.log(data,"dataa")
-          setSelectCategories({...selectCategories,data});
-  },[selectCategories]);
+  // const selectCategory = useCallback( (data) =>{
+  //   console.log(data,"dataa")
+  //         setSelectCategories({...selectCategories,data});
+  // },[selectCategories]);
+
+  const handleSelectCategory=(selectedCategory)=>{
+    setSelectCategories(selectedCategory)
+    
+  }
 
 
 
@@ -20,8 +26,8 @@ const Products = () => {
   return (
     <div className="products">
       <Container>
-        <Sidebar selectCategory={selectCategory}/>
-         <Items selectCategory={selectCategory}/>
+        <Sidebar  onSelectCategory={handleSelectCategory}/>
+         <Items selectCategory={selectCategories}/>
       </Container>
     </div>
 
