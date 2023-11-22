@@ -6,13 +6,14 @@ import Home from "./pages/home/Home";
 
 function App() {
   return (
-   <BrowserRouter>
+   // <BrowserRouter>
      <Routes>
        <Route exact path="/" element={<Login/>}/>
        <Route exact path="/home" element={<Home/>}/>
+       {/*<Route exact path="/home/:category/"*/}
      </Routes>
-    </BrowserRouter>
-    
+    // </BrowserRouter>
+
   );
 }
 

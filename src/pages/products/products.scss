@@ -1,6 +1,9 @@
 .products{
+  min-height:  calc(100vh - 86px);
   background-color: #F7FAFC;
   .container{
-    display: flex;
+    display: grid;
+    grid-template-columns: 20% 80%;
+
   }
 }
