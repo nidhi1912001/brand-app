@@ -1,77 +1,86 @@
-import React from 'react'
-import "./items.scss"
-import { useState,useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom'
+import axios from "axios";
 import favorite from "../../assets/favorite.png"
+import "./items.scss"
+import Product from "../product/product";
 
 
-const Items = ({selectCategory}) => {
+const Items = ( { selectCategory } ) => {
 
-  
-  const[allProductData,setAllProductData]=useState([])
-  const[categoryProduct,setCategoryProduct]=useState([])
+
+
+  const [ allProductData, setAllProductData ] = useState( [] )
+  const [categoryData, setCategoryData]=useState([])
+  const navigate=useNavigate()
+  // const [filters, setFilters] = useState({
+  //   categoryId: '',
+  //   priceRange: '',
+  //   // Add more filters as needed
+  // });
+
+
+  useEffect( () => {
+
+    if ( selectCategory.label==="category" ) {
+      axios.get( `https://api.escuelajs.co/api/v1/products?categoryId=${selectCategory.id}`
+      )
+        .then( ( data ) => {
+          setAllProductData( data.data );
+          setCategoryData(data.data)
+          // setCurrentPage(1); // Reset page to 1 when category changes
+        } )
+    } else if(categoryData && selectCategory.label==="price"){
+      axios.get(`https://api.escuelajs.co/api/v1/products/?price_min=900&price_max=1000`)
+    }
+
+    else {
+
+      axios.get( "https://api.escuelajs.co/api/v1/products" )
+        .then( ( data ) => setAllProductData( data.data ) )
+        .catch( ( error ) => {
+          console.error( 'Error fetching products by category:', error );
+        } );
+    }
+  }, [ selectCategory ] );
 
   useEffect(()=>{
-    fetch("https://api.escuelajs.co/api/v1/products/")
-    .then((response)=>response.json())
-    .then((data)=>setAllProductData(data))
+
+  })
 
 
-  },[])
+  const handleProductPreview=(id)=>{
+    navigate(`/product/${id}`)
+  }
 
-  useEffect(() => {
-    // Filter products based on selected category
-    if (!selectCategory) {
-      setCategoryProduct(allProductData); // Display all products if no category is selected
-    } else {
-      // Fetch products based on selected category
-      fetch(`https://api.escuelajs.co/api/v1/products/?categoryId=${selectCategory.id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setCategoryProduct(data);
-         // setCurrentPage(1); // Reset page to 1 when category changes
-        })
-        .catch((error) => {
-          console.error('Error fetching products by category:', error);
-        });
-    }
-  }, [selectCategory, allProductData]);
 
-  // const filterProducts=(e)=>{
-  
-  //   const filterData=productData.filter((value)=>value.category.id ===selectCategory.data.id )
-
-  // }
-  const productsToDisplay = selectCategory === '' ? allProductData : categoryProduct;
-
-   
   return (
     <div className="items">
 
-      
 
-    {allProductData.map((item)=>{
-       
-       return(
-        <div className="card">
-          <div className="card-img">
-          <img  className="image" src={item.images[0]}/>
-          </div>
-          <div className="card-content">
-            <div className="content-detail">
-            <div className="content-price">Rs.{item.price}</div>
-            <div className="content-title">{item.title}</div>
+      {allProductData?.map( ( item ) => {
+        console.log(item,"itemmmm")
+
+        return (
+          <div className="card">
+            <div className="card-img">
+              <img className="image" src={item.images[0]} onClick={()=>handleProductPreview(item.id)}/>
+            </div>
+            <div className="card-content">
+              <div className="content-detail">
+                <div className="content-price">Rs.{item.price}</div>
+                <div className="content-title">{item.title}</div>
+              </div>
+
+              <div className="favorite">
+                <img className="favorite-image" src={favorite} />
+              </div>
             </div>
 
-            <div className="favorite">
-              <img className="favorite-image" src={favorite} />
-            </div>
           </div>
-        
-        </div>
 
-      )
-    })}
-      
+        )
+      } )}
 
 
     </div>
@@ -79,3 +88,8 @@ const Items = ({selectCategory}) => {
 }
 
 export default Items
+
+
+// if(category){
+//   setProduct(category)
+// }else if (category && price )

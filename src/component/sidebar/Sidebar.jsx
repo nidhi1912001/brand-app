@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import DropdownList from "../dropdownList/DropdownList.jsx";
 import "./sidebar.scss";
 
-const Sidebar = ({onSelectCategory}) => {
-  const price = [
-    { id: 1, min: 0, max:500 },
-    { id: 2, min: 500, max:1000 },
-    { id: 3, min: 1000, max:1500 },
-    { id: 4, min: 1600, max:2000 },
-    { id: 5, min: 2100, max: 2500},
-    
-  ];
+const Sidebar = ( { onSelectCategory } ) => {
 
-  const priceOne=[0,500,1000,1500,2000,2500]
-  
+  const prices = [ 1, 500, 1000, 1500, 2000, 2500 ]
 
+
+  const minPrice = Math.min( ...prices );
+  const maxPrice = Math.max( ...prices );
+
+
+  const rangeSize = 500;
+  const numberOfRanges = Math.ceil( ( maxPrice - minPrice ) / rangeSize );
+  const priceRanges = Array.from( { length: numberOfRanges }, ( _, index ) => ( {
+    min: minPrice + index * rangeSize,
+    max: minPrice + ( index + 1 ) * rangeSize
+  } ) );
 
 
   const [ category, setCategory ] = useState( [] );
-  // const[selectObj,setSelectObj]=useState({})
 
 
   useEffect( () => {
@@ -27,18 +28,19 @@ const Sidebar = ({onSelectCategory}) => {
       .then( ( data ) => setCategory( data ) );
   }, [] );
 
+  const handleSelectPrice=useCallback((data)=>{
+    onSelectCategory({
+      price_min:data.min,
+      price_max:data.max
+    })
 
+  },[])
 
-  // const handleSelect = ( singleItem ) => {
-  //   const  {id, name} = singleItem;
-  //   selectCategory({id, name});
-    
-  // }
 
   return (
     <div className="sidebar">
       <DropdownList option={category} label="category" handleSelectOption={onSelectCategory}/>
-      <DropdownList option={price} label="price"/>
+      <DropdownList option={priceRanges} label="price" handleSelectOption={handleSelectPrice}/>
     </div>
   );
 };

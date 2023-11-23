@@ -6,19 +6,27 @@ import Container from "../../component/container/Container";
 
 const Products = () => {
 
-  const  [selectCategories, setSelectCategories] = useState({});
-  
+  const  [selectCategories, setSelectCategories] = useState( {  });
+  const [filters, setFilters] = useState({
 
+    // Add more filters as needed
 
-  // const selectCategory = useCallback( (data) =>{
-  //   console.log(data,"dataa")
-  //         setSelectCategories({...selectCategories,data});
-  // },[selectCategories]);
+  });
 
   const handleSelectCategory=(selectedCategory)=>{
     setSelectCategories(selectedCategory)
-    
+    console.log("newwww",selectCategories)
+    setFilters({...filters,name:selectCategories.id})
   }
+  console.log(filters,"filtersssssssssss")
+
+  // const handleSelectPrice=useCallback((data)=>{
+  //   onSelectCategory({
+  //     price_min:data.min,
+  //     price_max:data.max
+  //   })
+  //
+  // },[])
 
 
 
@@ -26,8 +34,8 @@ const Products = () => {
   return (
     <div className="products">
       <Container>
-        <Sidebar  onSelectCategory={handleSelectCategory}/>
-         <Items selectCategory={selectCategories}/>
+        <Sidebar  onSelectCategory={handleSelectCategory} handleSelectPrice={handleSelectCategory}/>
+        <Items selectCategory={selectCategories}/>
       </Container>
     </div>
 
