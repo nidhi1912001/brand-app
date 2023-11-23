@@ -13,7 +13,7 @@ const Logins = () => {
   const handleChange = ( e ) => {
     const { name, value } = e.target;
     setUserData( { ...userData, [name]: value } );
-    console.log( userData );
+
   };
 
   const handleSubmit = async ( e ) => {
@@ -27,14 +27,7 @@ const Logins = () => {
 
       console.log( "Response:", response.data );
     } catch (error) {
-      if ( error.response ) {
-        console.log( "Server responded with status:", error.response.status );
-        console.log( "Error message:", error.response.data );
-      } else if ( error.request ) {
-        console.log( "Request made but no response received:", error.request );
-      } else {
-        console.error( "Error:", error.message );
-      }
+      console.log(error);
     }
   };
 
@@ -58,7 +51,7 @@ const Logins = () => {
 
             <a href="" className="link"> Forgot password? </a>
           </div>
-          <button className="button-login" onClick={()=>navigate("/home")}> Login</button>
+          <button className="button-login" > Login</button>
         </div>
       </div>
     </form>
