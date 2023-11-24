@@ -1,46 +1,90 @@
-import React, { useCallback, useState } from "react";
-import Sidebar from "../../component/sidebar/Sidebar";
-import Items from "../items/Items";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"
+import favorite from "../../assets/favorite.png";
+import Product from "../../pages/product/product"
 import "./products.scss";
-import Container from "../../component/container/Container";
+import axios from "axios";
 
-const Products = () => {
-  const [selectCategory, setSelectCategory] = useState({});
-  const [filters, setFilters] = useState({});
-  const [label, setLabel] = useState("");
 
-  const handleSelectCategory = (selectedCategory, label) => {
-    const isSameValue =
-      label.toLowerCase() === "price"
-        ? selectedCategory.min === selectCategory[label]?.min &&
-          selectedCategory.max === selectCategory[label]?.max
-        : selectCategory[label] === selectedCategory;
+const Products = ( { selectCategory } ) => {
+  const [ allProductData, setAllProductData ] = useState( [] );
+  const[currentPage,setCurrentPage]=useState(1)
+  const[offSet,setOffSet]=useState(0)
+ const limit=10
 
-    const filterObject = { ...selectCategory, [label]: selectedCategory };
-    if (isSameValue) {
-      delete filterObject[label];
-    }
-    setSelectCategory({ ...filterObject });
-    setLabel(label);
-    // console.log("newwww",selectCategories)
-    // setFilters({...filters,name:selectCategories.id})
+  const navigate = useNavigate();
+  // const [filters, setFilters] = useState({
+  //   categoryId: '',
+  //   priceRange: '',
+  //   // Add more filters as needed
+  // });
+  console.log(currentPage,"currentPage")
+
+  useEffect( () => {
+    let filter = "";
+    if ( "category" in selectCategory )
+      filter = filter + `categoryId=${selectCategory["category"]}`;
+    if ( "price" in selectCategory )
+      filter =
+        filter +
+        ( filter ? "&" : "" ) +
+        `price_min=${selectCategory["price"].min}&price_max=${selectCategory["price"].max}`;
+
+    fetch( `https://api.escuelajs.co/api/v1/products?${filter}` )
+      .then( ( response ) => response.json() )
+      .then( ( data ) => setAllProductData( data || [] ) )
+      .catch( ( error ) => console.log( error ) );
+  }, [ selectCategory ] );
+
+
+
+  useEffect(()=>{
+     axios.get(`https://api.escuelajs.co/api/v1/products/?offset=${offSet}&limit=${limit}`)
+       .then((response)=>{
+         console.log(response.data)
+       })
+       setOffSet(offSet+limit)
+
+  },[])
+
+
+  const handleProductPreview = ( id ) => {
+    navigate( `/product/${id}` );
   };
-  console.log(selectCategory, "filtersssssssssssnidhiii");
-
-  // const handleSelectPrice=useCallback((data)=>{
-  //   onSelectCategory({
-  //     price_min:data.min,
-  //     price_max:data.max
-  //   })
-  //
-  // },[])
-
   return (
     <div className="products">
-      <Container>
-        <Sidebar onSelectCategory={handleSelectCategory} />
-        <Items selectCategory={selectCategory} label={label} />
-      </Container>
+
+      {allProductData?.map( ( item ) => {
+        return (
+          <div className="card">
+            <div className="card-img">
+              <img
+                className="image"
+                src={item.images[0]}
+                onClick={() => handleProductPreview( item.id )}
+              />
+            </div>
+            <div className="card-content">
+              <div className="content-detail">
+                <div className="content-price">Rs.{item.price}</div>
+                <div className="content-title">{item.title}</div>
+              </div>
+
+              <div className="favorite">
+                <img className="favorite-image" src={favorite}/>
+              </div>
+            </div>
+          </div>
+        );
+      } )}
+
+      <div className="pagination">
+        <button onClick={()=>setCurrentPage(currentPage-1)} >Previous</button>
+        {currentPage}
+        <button onClick={()=>setCurrentPage(currentPage+1)}>Next</button>
+
+      </div>
+
     </div>
   );
 };

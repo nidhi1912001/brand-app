@@ -1,28 +1,68 @@
-.container{
-   .preview{
-     display: flex;
-     .image-section{
-       .main-image{
+.peview-main{
+  background-color: #F8F9FA;
+  padding: 20px;
+  .container{
+    .preview{
+      display: grid;
+      grid-template-columns: 40% 60%;
+      border-radius: 6px;
+      border: 1px solid #DEE2E7;
+      background: #FFF;
+      padding: 20px;
 
-       }
-       .multi-image{
+      .image-section{
+        display: grid;
+        gap: 20px;
+        border-right: 1px solid  #DEE2E7;
+        .main-image{
+         height: 380px;
+          width: 380px;
 
-       }
+        }
+        .multi-image{
+          display: flex;
+          .single-image{
+            height: 48px;
+            width: 48px;
+          }
 
-     }
+        }
 
-     .preview-details{
-       .preview-title{
+      }
 
-       }
-       .preview-price{
+      .preview-details{
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .heading{
+          color:#1C1C1C ;
+          margin: 0;
+          font-family: "Inter";
+          font-size: 20px;
+          font-weight: 600;
+          letter-spacing: -0.2px;
+        }
 
-       }
-       .description{
+        .details{
+          border-bottom: 1px solid #DEE2E7;
+          padding: 10px;
+          display: grid;
+          grid-template-columns: 20% 80%;
+          .title{
+            font-family: "Inter";
+            font-size: 16px;
+            font-weight: 400;
+            color: #8B96A5;
 
-       }
 
-     }
+          }
+        }
 
-   }
+      }
+
+    }
+  }
+
 }
+

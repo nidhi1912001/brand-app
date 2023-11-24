@@ -4,14 +4,25 @@ import { FaUser,FaHeart } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import Input from "../input/Input";
-import "./header.scss"
 import logo from "../../assets/logo-symbol.png"
 import brand from "../../assets/Brand.png"
+import { RiLogoutCircleFill } from "react-icons/ri";
+import {useNavigate} from 'react-router-dom'
+import "./header.scss"
 
 
 const Header = () => {
+
+  const navigate=useNavigate()
+
+  const handleLogOut=()=>{
+    localStorage.removeItem('token')
+    navigate("/")
+
+  }
+
   return (
-    <Container>
+<Container>
       <div className="header">
         <div className="logo-contain">
           <img src={logo} className="logo" />
@@ -46,9 +57,14 @@ const Header = () => {
 
 
         </div>
-      </div>
-    </Container>
 
+        <div className="icon-container" onClick={handleLogOut}>
+          <RiLogoutCircleFill className="icon" />
+          <button className="icon-data">Log Out</button>
+        </div>
+      </div>
+
+</Container>
 
   )
 }

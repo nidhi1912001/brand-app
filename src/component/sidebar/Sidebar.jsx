@@ -43,8 +43,9 @@ const Sidebar = ({ onSelectCategory }) => {
       />
       <DropdownList
         option={priceRanges.map((price) => ({
-          name: `${price.min}-${price.max}`,
           value: price,
+          name: `${price.min}-${price.max}`
+
         }))}
         label="price"
         handleSelectOption={onSelectCategory}

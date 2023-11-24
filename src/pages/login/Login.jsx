@@ -24,15 +24,16 @@ const Logins = () => {
         "https://api.escuelajs.co/api/v1/auth/login",
         userData
       );
-
-      console.log( "Response:", response.data );
+      console.log( "Response:", response.data.access_token );
+      localStorage.setItem('token',  response.data.access_token )
+      navigate("/home")
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <form className="login-main" onSubmit={handleSubmit}>
+    <form className="login-main" >
       <div className="login">
         <p className="heading">Sign in</p>
         <p className="contain">Sign in and start managing your candidates!</p>
@@ -51,7 +52,7 @@ const Logins = () => {
 
             <a href="" className="link"> Forgot password? </a>
           </div>
-          <button className="button-login" > Login</button>
+          <button className="button-login" onClick={handleSubmit} > Login</button>
         </div>
       </div>
     </form>

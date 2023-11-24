@@ -25,3 +25,21 @@
 
 $see-all-color:#0D6EFD;
 $option-color:#505050;
+
+.icon-container{
+    display: grid;
+    gap: 7px;
+    .icon{
+        width: 20px;
+        height: 19px;
+        color: #8B96A5;
+        margin: auto;
+    }
+    .icon-data{
+        color:  #8B96A5;
+        text-align: center;
+        font-family: "Inter";
+        font-size: 12px;
+    }
+
+}
