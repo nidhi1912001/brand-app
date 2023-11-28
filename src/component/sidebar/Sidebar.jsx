@@ -2,8 +2,16 @@ import React, { useCallback, useEffect, useState } from "react";
 import DropdownList from "../dropdownList/DropdownList.jsx";
 import "./sidebar.scss";
 
-const Sidebar = ({ onSelectCategory }) => {
+const Sidebar = ( { onSelectCategory }) => {
   const prices = [1, 500, 1000, 1500, 2000, 2500];
+
+  // const onSelectCategory=(category)=>{
+  //   console.log(category,"hellllooooo")
+  // }
+  // const onSelectCategory=(slectedOne,label)=>{
+  //   console.log(slectedOne,"helllo")
+  //   console.log(label,"labelHello")
+  // }
 
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
@@ -34,19 +42,12 @@ const Sidebar = ({ onSelectCategory }) => {
   return (
     <div className="sidebar">
       <DropdownList
-        option={categories.map((category) => ({
-          value: category.id,
-          name: category.name,
-        }))}
+        option={categories}
         label="category"
         handleSelectOption={onSelectCategory}
       />
       <DropdownList
-        option={priceRanges.map((price) => ({
-          value: price,
-          name: `${price.min}-${price.max}`
-
-        }))}
+        option={priceRanges}
         label="price"
         handleSelectOption={onSelectCategory}
       />

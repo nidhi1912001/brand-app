@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import "./dropdownList.scss";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 
-const DropdownList = ({ option, label, handleSelectOption }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [remaining, setRemaining] = useState(false);
+const DropdownList = ( { option, label, handleSelectOption } ) => {
+  const [ isOpen, setIsOpen ] = useState( false );
+  const [ remaining, setRemaining ] = useState( false );
+
 
   const handleToggle = () => {
-    setIsOpen(!isOpen);
-    setRemaining(false);
+    setIsOpen( !isOpen );
+    setRemaining( false );
   };
 
   const handleRemaining = () => {
-    setRemaining(true);
+    setRemaining( true );
   };
 
   return (
@@ -21,23 +22,25 @@ const DropdownList = ({ option, label, handleSelectOption }) => {
         <button className="dropdown-button" onClick={handleToggle}>
           <span className="label">{label}</span>{" "}
           {isOpen ? (
-            <RiArrowDropUpLine className="dropdown-icon" />
+            <RiArrowDropUpLine className="dropdown-icon"/>
           ) : (
-            <RiArrowDropDownLine className="dropdown-icon" />
+            <RiArrowDropDownLine className="dropdown-icon"/>
           )}
         </button>
       </div>
       {isOpen && (
         <div className="dropdown-options">
-          {(remaining ? option : option.slice(0, 3)).map((singleItem) => (
+          {( remaining ? option : option.slice( 0, 3 ) ).map( ( singleItem ) => (
             <button
               className="option-button"
-              key={singleItem.value}
-              onClick={() => handleSelectOption(singleItem.value, label)}
+              key={singleItem}
+              onClick={() => handleSelectOption( singleItem, label )
+
+              }
             >
-              {singleItem.name}
+              {label === "category" ? singleItem.name : `${singleItem.min}-${singleItem.max}`}
             </button>
-          ))}
+          ) )}
 
           {!remaining && (
             <button className="option-button seeall" onClick={handleRemaining}>

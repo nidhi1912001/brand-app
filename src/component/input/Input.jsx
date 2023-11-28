@@ -1,25 +1,25 @@
 import React from 'react'
 import "./input.scss"
 
-const Input = (props) => {
+const Input = ( props ) => {
 
-  const {type,name,value,onChange,placeholder}= props
-  let className= ""
-  switch(type){
+  const { type, name, value, onChange, placeholder } = props
+  let className = ""
+  switch ( type ) {
     case "text":
     case "password":
-      className="input";
+      className = "input";
       break;
     case "checkbox":
-      className="checkbox-input";
+      className = "checkbox-input";
       break;
     case "search":
-      className="search-input"
+      className = "search-input"
   }
 
   return (
     <div>
-    <input className={className} type={type} name={name} onChange={onChange} value={value} placeholder={placeholder}/>
+      <input className={className} type={type} name={name} onChange={onChange} value={value} placeholder={placeholder}/>
     </div>
   )
 }

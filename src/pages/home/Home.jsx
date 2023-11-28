@@ -6,22 +6,25 @@ import Container from "../../component/container/Container";
 
 const Home = () => {
 
-  const [selectCategory, setSelectCategory] = useState({});
-  const [label, setLabel] = useState("")
+  const [ selectCategory, setSelectCategory ] = useState( {} );
+  const [ label, setLabel ] = useState( "" )
 
-  const handleSelectCategory = (selectedCategory, label) => {
-    const isSameValue =
-      label.toLowerCase() === "price"
-        ? selectedCategory.min === selectCategory[label]?.min &&
-        selectedCategory.max === selectCategory[label]?.max
-        : selectCategory[label] === selectedCategory;
+  const handleSelectCategory = ( selectedOne, label ) => {
+    setSelectCategory( selectedOne )
+    setLabel( label )
 
-    const filterObject = { ...selectCategory, [label]: selectedCategory };
-    if (isSameValue) {
-      delete filterObject[label];
-    }
-    setSelectCategory({ ...filterObject });
-    setLabel(label);
+    // const isSameValue =
+    //   label.toLowerCase() === "price"
+    //     ? selectedCategory.min === selectCategory[label]?.min &&
+    //     selectedCategory.max === selectCategory[label]?.max
+    //     : selectCategory[label] === selectedCategory;
+    //
+    // const filterObject = { ...selectCategory, [label]: selectedCategory };
+    // if (isSameValue) {
+    //   delete filterObject[label];
+    // }
+    // setSelectCategory({ ...filterObject });
+
 
   };
   // const handleSelectPrice=useCallback((data)=>{
@@ -38,8 +41,9 @@ const Home = () => {
     <div className="home">
       <Container>
 
-      <Sidebar onSelectCategory={handleSelectCategory}/>
-      <Products selectCategory={selectCategory}/>
+        {/*<Sidebar onSelectCategory={handleSelectCategory}/>*/}
+        <Sidebar onSelectCategory={handleSelectCategory}/>
+        <Products selectCategory={selectCategory} label={label}/>
       </Container>
 
 
