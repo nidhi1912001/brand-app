@@ -1,59 +1,121 @@
-.products{
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 20px;
-  margin-left:  22px;
+.products-main {
+  margin-left: 22px;
 
-  .card{
-    background-color: #FFFFFF;;
-    border: 1px solid #DEE2E7;
-    border-radius: 5px;
+  .loader-main {
 
 
-    .card-img{
-      display: flex;
-      justify-content: center;
-      padding: 12px 0px;
-      border-bottom: 1px solid #EFF2F4;;
-      .image{
-        width:200px;
-        height: 200px;
+    .loading-screen {
+      border: 7px solid #f3f3f3;
+      border-top: 7px solid #f7ae65;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      animation: spin 1.5s linear infinite;
+      margin: 30% auto;
 
-      }
-    }
-    .card-content{
-      display: flex;
-      justify-content: space-around;
-      padding: 18px 0px;
-
-      .content-detail{
-        display: grid;
-        gap: 5px;
-        .content-price{
-          font-family: "Inter";
-          font-size: 18px;
-          font-weight: 600;
-        }
-        .content-title{
-          font-family: "Inter";
-          font-size: 16px;
-          font-weight: 400;
-          line-height: 24px;
-          color: #606060 ;
-        }
-      }
-      .favorite{
-        .favorite-image{
-          border-radius: 6px;
-          border: 1px solid  #DEE2E7;
-          background: #FFF;
-          padding: 2px;
-
-        }
-
-      }
 
     }
 
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  .products-contain {
+    display: grid;
+    gap: 20px;
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+
+      .card {
+        background-color: #FFFFFF;;
+        border: 1px solid #DEE2E7;
+        border-radius: 5px;
+
+
+        .card-img {
+          display: flex;
+          justify-content: center;
+          padding: 12px 0px;
+          border-bottom: 1px solid #EFF2F4;;
+
+          .image {
+            width: 200px;
+            height: 200px;
+
+          }
+        }
+
+        .card-content {
+          display: flex;
+          justify-content: space-around;
+          padding: 18px 0px;
+
+          .content-detail {
+            display: grid;
+            gap: 5px;
+
+            .content-price {
+              font-family: "Inter";
+              font-size: 18px;
+              font-weight: 600;
+            }
+
+            .content-title {
+              font-family: "Inter";
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 24px;
+              color: #606060;
+            }
+          }
+
+          .favorite {
+            .favorite-image {
+              border-radius: 6px;
+              border: 1px solid #DEE2E7;
+              background: #FFF;
+              padding: 2px;
+
+            }
+
+          }
+
+        }
+
+
+      }
+    }
+
+    .pagination {
+      display: flex;
+
+
+      .paginationButton {
+        background: none;
+        border: 1px solid #DEE2E7;
+        font-family: "Inter";
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      .currentPage {
+        background-color: #127FFF;
+        height: auto;
+
+
+      }
+
+    }
   }
 }
+
+

@@ -1,11 +1,11 @@
-.home{
-  min-height:  calc(100vh - 86px);
+.home {
+  min-height: calc(100vh - 86px);
   background-color: #F7FAFC;
-  //
-.container{
-  display: grid;
-  grid-template-columns: 20% 80%;
 
-}
+  .container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+
+  }
 
 }

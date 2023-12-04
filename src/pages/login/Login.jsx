@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 import "./login.scss";
 import Input from "../../component/input/Input";
@@ -20,27 +20,29 @@ const Logins = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "https://api.escuelajs.co/api/v1/auth/login",
-        userData
-      );
-      console.log( "Response:", response.data.access_token );
-      localStorage.setItem('token',  response.data.access_token )
+      const response = await axios.post( "https://api.escuelajs.co/api/v1/auth/login",
+       userData
+
+       )
+      console.log( response.data, "responseeee" )
+      localStorage.setItem("token",response.data.token)
       navigate("/home")
     } catch (error) {
-      console.log(error);
+      console.error( "error" )
+
     }
+
   };
 
   return (
-    <form className="login-main" >
+    <form className="login-main">
       <div className="login">
         <p className="heading">Sign in</p>
         <p className="contain">Sign in and start managing your candidates!</p>
 
         <div className="login-data">
 
-          <Input type="text" name="email" value={userData.email} onChange={handleChange} placeholder="Email"/>
+          <Input type="text" name="email" value={userData.email} onChange={handleChange} placeholder="username"/>
 
           <Input type="password" name="password" value={userData.password} onChange={handleChange}
                  placeholder="password"/>
@@ -52,7 +54,7 @@ const Logins = () => {
 
             <a href="" className="link"> Forgot password? </a>
           </div>
-          <button className="button-login" onClick={handleSubmit} > Login</button>
+          <button className="button-login" onClick={handleSubmit}> Login</button>
         </div>
       </div>
     </form>

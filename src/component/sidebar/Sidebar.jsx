@@ -5,14 +5,6 @@ import "./sidebar.scss";
 const Sidebar = ( { onSelectCategory }) => {
   const prices = [1, 500, 1000, 1500, 2000, 2500];
 
-  // const onSelectCategory=(category)=>{
-  //   console.log(category,"hellllooooo")
-  // }
-  // const onSelectCategory=(slectedOne,label)=>{
-  //   console.log(slectedOne,"helllo")
-  //   console.log(label,"labelHello")
-  // }
-
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
 
@@ -26,10 +18,11 @@ const Sidebar = ( { onSelectCategory }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("https://api.escuelajs.co/api/v1/categories/")
+    fetch("https://api.escuelajs.co/api/v1/categories")
       .then((response) => response.json())
-      .then((data) => setCategories(data));
+      .then((data) =>setCategories(data));
   }, []);
+
 
   // const handleSelectPrice=useCallback((data)=>{
   //   onSelectCategory({

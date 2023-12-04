@@ -12,12 +12,10 @@ const Products = ( { selectCategory, label } ) => {
   const [ offSet, setOffSet ] = useState( 0 )
   const limit = 10
   const navigate = useNavigate();
-  console.log( allProductData.length, "allProductData" )
 
   const handleNext = () => {
     setCurrentPage( currentPage + 1 )
     setOffSet( offSet + limit )
-
   }
 
   const handlePrevious = () => {
@@ -30,14 +28,14 @@ const Products = ( { selectCategory, label } ) => {
   useEffect( () => {
 
     if ( label === "category" ) {
-      fetch( `https://api.escuelajs.co/api/v1/products?categoryId=${selectCategory.id}` )
+      fetch( `https://api.escuelajs.co/api/v1/products?categoryId=${selectCategory.id}&offset=${offSet}&limit=${limit}` )
         .then( ( response ) => response.json() )
-        .then( ( data ) => setAllProductData( data ) )
+        .then( ( data ) => setAllProductData( data )  )
 
     } else if ( label === "price" ) {
-      fetch( `https://api.escuelajs.co/api/v1/products/?price_min=${selectCategory.min}&price_max=${selectCategory.max}` )
-        .then((response)=>response.json())
-        .then((data)=>setAllProductData(data))
+      fetch( `https://api.escuelajs.co/api/v1/products/?price_min=${selectCategory.min}&price_max=${selectCategory.max}&offset=${offSet}&limit=${limit}` )
+        .then( ( response ) => response.json() )
+        .then( ( data ) => setAllProductData( data ) )
     } else {
 
       fetch( `https://api.escuelajs.co/api/v1/products?offset=${offSet}&limit=${limit}` )
@@ -58,43 +56,57 @@ const Products = ( { selectCategory, label } ) => {
 
 
 
-  return (
-    <div className="products">
+    return (
 
-      {allProductData?.map( ( item ) => {
-        return (
-          <div className="card">
-            <div className="card-img">
-              <img
-                className="image"
-                src={item.images[0]}
-                onClick={() => handleProductPreview( item.id )}
-              />
-            </div>
-            <div className="card-content">
-              <div className="content-detail">
-                <div className="content-price">Rs.{item.price}</div>
-                <div className="content-title">{item.title}</div>
+    <div className="products-main">
+
+
+      {!allProductData.length ?
+        <div className="loader-main">
+        <p className="loading-screen"></p>
+        </div>
+          :
+        <div className="products-contain">
+        <div className="products">
+
+          {allProductData?.map( ( item ) => {
+            return (
+              <div className="card">
+                <div className="card-img">
+                  <img
+                    className="image"
+                    src={item.images[0]}
+                    onClick={() => handleProductPreview( item.id )}
+                  />
+                </div>
+                <div className="card-content">
+                  <div className="content-detail">
+                    <div className="content-price">Rs.{item.price}</div>
+                    <div className="content-title">{item.title}</div>
+                  </div>
+
+                  <div className="favorite">
+                    <img className="favorite-image" src={favorite}/>
+                  </div>
+                </div>
               </div>
-
-              <div className="favorite">
-                <img className="favorite-image" src={favorite}/>
-              </div>
-            </div>
-          </div>
-        );
-      } )}
+            );
+          } )}
+        </div>
 
 
-      <div className="pagination">
-        <button disabled={currentPage === 1} onClick={handlePrevious}>Previous</button>
-        {currentPage}
-        <button onClick={handleNext}>Next</button>
+        <div className="pagination">
+        <button className="paginationButton" disabled={currentPage === 1} onClick={handlePrevious}>Previous</button>
+        <p className="currentPage"> {currentPage} </p>
+        <button className="paginationButton" onClick={handleNext}>Next</button>
 
-      </div>
+        </div>
+        </div>
 
+      }
     </div>
   );
-};
+
+}
 
 export default Products;
