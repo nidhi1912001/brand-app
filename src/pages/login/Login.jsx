@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "./login.scss";
 import Input from "../../component/input/Input";
+import authAction from "../../slice/authSection/authAction";
+
 
 const Logins = () => {
   const [ userData, setUserData ] = useState( { email: "", password: "" } );
   const navigate = useNavigate()
-  const accessToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTcwMDQ4MjQzNCwiZXhwIjoxNzAyMjEwNDM0fQ.O8ljCJhWEYau6_mZJERLyX4Oi166jCb25ISWg8ng9ls`;
+// const {token} = useSelector((state)=>state.auth)
 
   const handleChange = ( e ) => {
     const { name, value } = e.target;
@@ -16,23 +19,23 @@ const Logins = () => {
 
   };
 
-  const handleSubmit = async ( e ) => {
-    e.preventDefault();
+  const dispatch=useDispatch()
 
-    try {
-      const response = await axios.post( "https://api.escuelajs.co/api/v1/auth/login",
-       userData
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    // dispatch(authAction(userData)).then((result)=>{
+    //   if(result.payload){
+    //     navigate("/home")
+    //   }
+    // })
+    dispatch(authAction(userData))
+    navigate("/home")
 
-       )
-      console.log( response.data, "responseeee" )
-      localStorage.setItem("token",response.data.token)
-      navigate("/home")
-    } catch (error) {
-      console.error( "error" )
+  }
 
-    }
-
-  };
+  // useEffect(()=>{
+  //   token && navigate("/home")
+  // },[token])
 
   return (
     <form className="login-main">

@@ -1,5 +1,6 @@
 import React from 'react'
 import Container from '../container/Container';
+import {useDispatch} from "react-redux";
 import { FaUser, FaHeart } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
@@ -9,15 +10,17 @@ import brand from "../../assets/Brand.png"
 import { RiLogoutCircleFill } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom'
 import "./header.scss"
+import { logout } from "../../slice/authSection/AuthSlice";
 
 
 const Header = () => {
 
   const navigate = useNavigate()
+  const dispatch=useDispatch()
 
   const handleLogOut = () => {
-    localStorage.removeItem( 'token' )
     navigate( "/" )
+    dispatch(logout())
 
   }
 
