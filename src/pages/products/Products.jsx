@@ -48,8 +48,6 @@ const Products = ( { selectCategory, label } ) => {
   return (
 
     <div className="products-main">
-
-
       {!data.length ?
         <div className="loader-main">
         <p className="loading-screen"></p>
@@ -82,12 +80,10 @@ const Products = ( { selectCategory, label } ) => {
             );
           } )}
         </div>
-
-
         <div className="pagination">
-        <button className="paginationButton" disabled={currentPage === 1} onClick={()=>dispatch(handlePrevious())} >Previous</button>
+        <button className="paginationButton" disabled={currentPage === 1} onClick={()=>dispatch(handlePrevious({offSet,currentPage}))} >Previous</button>
         <p className="currentPage"> {currentPage} </p>
-        <button className="paginationButton"  onClick={()=>dispatch(handleNext())}>Next</button>
+        <button className="paginationButton"  onClick={()=>dispatch(handleNext({offSet,currentPage}))}>Next</button>
 
         </div>
         </div>
