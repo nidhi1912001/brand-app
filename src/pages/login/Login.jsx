@@ -23,13 +23,12 @@ const Logins = () => {
 
   const handleSubmit=(e)=>{
     e.preventDefault()
-    // dispatch(authAction(userData)).then((result)=>{
-    //   if(result.payload){
-    //     navigate("/home")
-    //   }
-    // })
-    dispatch(authAction(userData))
-    navigate("/home")
+    dispatch(authAction(userData)).then((result)=>{
+      if(result.payload){
+        navigate("/home")
+      }
+    })
+
 
   }
 

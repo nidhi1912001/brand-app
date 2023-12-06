@@ -1,67 +1,56 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
+import { allProducts, categoryProducts,priceProducts } from "../../slice/products/productsAction";
+import {handlePrevious,handleNext} from "../../slice/products/productsSlice";
+import {useDispatch,useSelector} from "react-redux";
 import favorite from "../../assets/favorite.png";
 import "./products.scss";
-import axios from "axios";
+
 
 
 const Products = ( { selectCategory, label } ) => {
-  const [ allProductData, setAllProductData ] = useState( [] );
-  const [ currentPage, setCurrentPage ] = useState( 1 )
-  // const [hasMoreData, setHasMoreData] = useState(true);
-  const [ offSet, setOffSet ] = useState( 0 )
-  const limit = 10
+   // const [ currentPage, setCurrentPage ] = useState( 1 )
+   // const [ offSet, setOffSet ] = useState( 0 )
+   // const limit = 10
   const navigate = useNavigate();
+  const dispatch=useDispatch()
+  const { data,currentPage,offSet,limit }=useSelector((state)=>state.productData)
+  // console.log(data,currentPage,offSet)
+  // const data=useSelector((state)=>state.productData.data)
 
-  const handleNext = () => {
-    setCurrentPage( currentPage + 1 )
-    setOffSet( offSet + limit )
-  }
+  // const handleNext = () => {
+  //   setCurrentPage( currentPage + 1 )
+  //   setOffSet( offSet + limit )
+  // }
+  //
+  // const handlePrevious = () => {
+  //   setCurrentPage( currentPage - 1 )
+  //   setOffSet( offSet - limit )
+  //
+  // }
 
-  const handlePrevious = () => {
-    setCurrentPage( currentPage - 1 )
-    setOffSet( offSet - limit )
 
-  }
-
-
-  useEffect( () => {
-
-    if ( label === "category" ) {
-      fetch( `https://api.escuelajs.co/api/v1/products?categoryId=${selectCategory.id}&offset=${offSet}&limit=${limit}` )
-        .then( ( response ) => response.json() )
-        .then( ( data ) => setAllProductData( data )  )
-
-    } else if ( label === "price" ) {
-      fetch( `https://api.escuelajs.co/api/v1/products/?price_min=${selectCategory.min}&price_max=${selectCategory.max}&offset=${offSet}&limit=${limit}` )
-        .then( ( response ) => response.json() )
-        .then( ( data ) => setAllProductData( data ) )
-    } else {
-
-      fetch( `https://api.escuelajs.co/api/v1/products?offset=${offSet}&limit=${limit}` )
-        .then( ( response ) => response.json() )
-        .then( ( data ) => {
-          setAllProductData( data )
-
-        } )
-
-    }
-
-  }, [ selectCategory, label, offSet ] )
+  useEffect(()=>{
+   if(label==="category"){
+     dispatch(categoryProducts({selectCategory,offSet,limit}))
+   }else if(label === "price"){
+    dispatch(priceProducts({selectCategory,offSet,limit}))
+   }else {
+     dispatch(allProducts({offSet,limit}))
+   }
+  },[ selectCategory, label, offSet ])
 
 
   const handleProductPreview = ( id ) => {
     navigate( `/product/${id}` );
   };
 
-
-
-    return (
+  return (
 
     <div className="products-main">
 
 
-      {!allProductData.length ?
+      {!data.length ?
         <div className="loader-main">
         <p className="loading-screen"></p>
         </div>
@@ -69,7 +58,7 @@ const Products = ( { selectCategory, label } ) => {
         <div className="products-contain">
         <div className="products">
 
-          {allProductData?.map( ( item ) => {
+          {data?.map( ( item ) => {
             return (
               <div className="card">
                 <div className="card-img">
@@ -96,9 +85,9 @@ const Products = ( { selectCategory, label } ) => {
 
 
         <div className="pagination">
-        <button className="paginationButton" disabled={currentPage === 1} onClick={handlePrevious}>Previous</button>
+        <button className="paginationButton" disabled={currentPage === 1} onClick={()=>dispatch(handlePrevious())} >Previous</button>
         <p className="currentPage"> {currentPage} </p>
-        <button className="paginationButton" onClick={handleNext}>Next</button>
+        <button className="paginationButton"  onClick={()=>dispatch(handleNext())}>Next</button>
 
         </div>
         </div>

@@ -45,15 +45,3 @@ const AuthSlice = createSlice( {
 } )
 export const { logout } = AuthSlice.actions
 export default AuthSlice.reducer
-
-
-//
-// export const logout=createAsyncThunk(()=> {
-//   return createAsyncThunk(
-//     `${name}/logout`,
-//     function (arg, { dispatch }) {
-//       dispatch(authActions.setAuth(null));
-//       localStorage.removeItem('auth');
-//       history.navigate('/account/login');
-//     }
-//   );
