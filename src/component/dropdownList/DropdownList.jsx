@@ -19,7 +19,7 @@ const DropdownList = ( { option, label, handleSelectOption } ) => {
   return (
     <div className="dropdown">
       <div className="dropdown-header" onClick={handleToggle}>
-        <button className="dropdown-button" onClick={handleToggle}>
+        <button className="dropdown-button" >
           <span className="label">{label}</span>{" "}
           {isOpen ? (
             <RiArrowDropUpLine className="dropdown-icon"/>

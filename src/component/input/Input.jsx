@@ -19,7 +19,7 @@ const Input = ( props ) => {
 
   return (
     <div>
-      <input className={className} type={type} name={name} onChange={onChange} value={value} placeholder={placeholder}/>
+      <input className={className} type={type} name={name} onChange={onChange} value={value} placeholder={placeholder} />
     </div>
   )
 }

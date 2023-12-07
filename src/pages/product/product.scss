@@ -1,8 +1,9 @@
-.peview-main{
+.peview-main {
   background-color: #F8F9FA;
   padding: 20px;
-  .container{
-    .preview{
+
+  .container {
+    .preview {
       display: grid;
       grid-template-columns: 40% 60%;
       border-radius: 6px;
@@ -10,18 +11,22 @@
       background: #FFF;
       padding: 20px;
 
-      .image-section{
+      .image-section {
         display: grid;
         gap: 20px;
-        border-right: 1px solid  #DEE2E7;
-        .main-image{
-         height: 380px;
+        border-right: 1px solid #DEE2E7;
+
+        .main-image {
+          height: 380px;
 
 
         }
-        .multi-image{
+
+        .multi-image {
           display: flex;
-          .single-image{
+          gap: 10px;
+
+          .single-image {
             height: 48px;
             width: 48px;
           }
@@ -30,13 +35,14 @@
 
       }
 
-      .preview-details{
+      .preview-details {
         padding: 20px;
         display: flex;
         flex-direction: column;
         gap: 20px;
-        .heading{
-          color:#1C1C1C ;
+
+        .heading {
+          color: #1C1C1C;
           margin: 0;
           font-family: "Inter";
           font-size: 20px;
@@ -44,12 +50,13 @@
           letter-spacing: -0.2px;
         }
 
-        .details{
+        .details {
           border-bottom: 1px solid #DEE2E7;
           padding: 10px;
           display: grid;
           grid-template-columns: 20% 80%;
-          .title{
+
+          .title {
             font-family: "Inter";
             font-size: 16px;
             font-weight: 400;

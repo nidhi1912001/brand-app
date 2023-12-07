@@ -3,6 +3,7 @@
 
 .dropdown{
 
+
   .dropdown-header{
     .dropdown-button{
       background: none;
@@ -34,6 +35,17 @@
     gap: 10px;
     overflow: auto;
     max-height: 300px;
+    &::-webkit-scrollbar {
+      border-radius: 10px;
+      border: 1px solid  #8CB7F5 ;
+      width: 5px;
+
+    }
+    &::-webkit-scrollbar-thumb{
+      background:  #8CB7F5;
+      border-radius: 10px;
+      height: 1px;
+    }
 
     .option-button {
       font-family: "Inter";
@@ -42,12 +54,22 @@
       text-align: start;
       border: none;
       background: none;
-      padding: 0px;
+      padding: 12px 0px;
       color:$option-color;
 
+      &:focus{
+        border-bottom: 2px solid #8CB7F5 ;
+        width: 50%;
+        font-weight: bold;
+
+      }
       &.seeall {
         color: $see-all-color;
+        border-bottom: none;
+        font-weight: unset;
+
       }
+
     }
   }
 

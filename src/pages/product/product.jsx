@@ -6,40 +6,27 @@ import Container from "../../component/container/Container";
 import "./product.scss"
 
 const Product = () => {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
   const { id } = useParams();
-  // const [ product, setProduct ] = useState( {} );
-  // useEffect( () => {
-  //   axios.get( `https://api.escuelajs.co/api/v1/products/${id}`
-  //   )
-  //     .then( ( data ) => {
-  //       setProduct( data.data )
+  useEffect( () => {
+    dispatch( productPreview( { id } ) )
+  }, [ id ] )
 
-  //     } )
-  // }, [ id ] )
-
-  useEffect(()=>{
-     dispatch(productPreview(id))
-  },[id])
-
-  // const data=useSelector((state)=>console.log(state.productData,"whattt"))
-const data={}
-
-
+  const productPreviewData = useSelector( ( state ) => state.productData.productPreview )
   return (
     <div className="peview-main">
       <Container>
-        {Object.keys( data ).length && (
+        {Object.keys( productPreviewData ).length && (
 
 
           <div className="preview">
             <div className="image-section">
 
 
-              <img className="main-image" src={data.category.image} alt="imagesss"/>
+              <img className="main-image" src={productPreviewData.images[0]} alt="imagesss"/>
 
               <div className="multi-image">
-                {data.images.map( ( img ) => {
+                {productPreviewData.images.map( ( img ) => {
                   return <img className="single-image" src={img}/>
                 } )}
               </div>
@@ -50,16 +37,17 @@ const data={}
               <h1 className="heading">Product Details</h1>
 
               <div className="details">
-                <label className="title">Title:-</label><span className="title-detail">{data.title}</span>
+                <label className="title">Title:-</label><span className="title-detail">{productPreviewData.title}</span>
               </div>
 
               <div className="details">
-                <label className="title">Price:-</label><span className="price-detail"> {data.price}/-</span>
+                <label className="title">Price:-</label><span
+                className="price-detail"> {productPreviewData.price}/-</span>
               </div>
 
               <div className="details">
                 <label className="title">Description:-</label><span
-                className="description-detail">{data.description}</span>
+                className="description-detail">{productPreviewData.description}</span>
               </div>
 
 
@@ -69,8 +57,6 @@ const data={}
 
         )
         }
-
-
       </Container>
     </div>
   )

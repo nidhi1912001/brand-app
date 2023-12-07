@@ -19,15 +19,15 @@ const Logins = () => {
 
   };
 
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
 
-  const handleSubmit=(e)=>{
+  const handleSubmit = ( e ) => {
     e.preventDefault()
-    dispatch(authAction(userData)).then((result)=>{
-      if(result.payload){
-        navigate("/home")
+    dispatch( authAction( userData ) ).then( ( result ) => {
+      if ( result.payload ) {
+        navigate( "/home" )
       }
-    })
+    } )
 
 
   }
@@ -44,7 +44,8 @@ const Logins = () => {
 
         <div className="login-data">
 
-          <Input type="text" name="email" value={userData.email} onChange={handleChange} placeholder="username"/>
+          <Input type="text" name="email" value={userData.email} onChange={handleChange} placeholder="username"
+                 autocomplete="off"/>
 
           <Input type="password" name="password" value={userData.password} onChange={handleChange}
                  placeholder="password"/>
